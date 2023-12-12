@@ -1,0 +1,9 @@
+{
+  "name": "bun-rsc",
+  "workspaces": [
+    "packages/*"
+  ],
+  "dependencies": {
+    "@tanstack/react-router": "beta"
+  }
+}

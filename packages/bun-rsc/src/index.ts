@@ -1,0 +1,1 @@
+export {rscLoader} from "./router" 
