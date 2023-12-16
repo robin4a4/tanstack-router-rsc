@@ -1,4 +1,4 @@
-import React, { StrictMode } from 'react'
+import React, { StrictMode, Suspense, use } from 'react'
 import ReactDOM from 'react-dom/client'
 import {
   Outlet,
@@ -48,7 +48,9 @@ const aboutRoute = new Route({
 })
 
 function About() {
-    return aboutRoute.useLoaderData()
+  const component = aboutRoute.useLoaderData()
+  console.log(component)
+    return <Suspense fallback={<div>Loading...</div>}>{use(component)}</Suspense>
 }
 
 const routeTree = rootRoute.addChildren([indexRoute, aboutRoute])

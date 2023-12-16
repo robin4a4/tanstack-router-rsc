@@ -55,11 +55,9 @@ export async function build() {
 
 						// if it is a client component, return a reference to the client bundle
 						const root = process.cwd()
-						const srcSplit = root.split("/")
-						const currentDirectoryName = combineUrl(srcSplit[srcSplit.length - 1], path.replace(root, ""))
-						const outputKey = combineUrl("/dist/client", currentDirectoryName)
+						const outputKey = combineUrl("/dist/client", path.replace(root, ""))
 						
-						if (isDebug) console.log("outputKey", outputKey)
+						console.log("outputKey", outputKey)
 
 						const moduleExports = transpiler.scan(code).exports
 						if (isDebug) console.log("exports", moduleExports)

@@ -52,5 +52,5 @@ export function rscLoader({ location }) {
   const url = `/rsc?component=${lastSegment}`;
 
   const lazyJsx = createFromFetch(fetch(url));
-  return <Suspense>{use(lazyJsx)}</Suspense>;
+  return lazyJsx;
 }
