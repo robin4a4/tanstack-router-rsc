@@ -9,7 +9,7 @@ import {
   RootRoute,
 } from '@tanstack/react-router'
 
-import {rscLoader} from "bun-rsc" 
+import {rscLoader, ServerOutput} from "bun-rsc" 
 
 const rootRoute = new RootRoute({
   component: () => (
@@ -43,15 +43,8 @@ const indexRoute = new Route({
 const aboutRoute = new Route({
   getParentRoute: () => rootRoute,
   path: '/about',
-  loader: rscLoader,
-  component: About
+  component: () => <ServerOutput componentName="about" fallback={<div>Loading...</div>} />
 })
-
-function About() {
-  const component = aboutRoute.useLoaderData()
-  console.log(component)
-    return <Suspense fallback={<div>Loading...</div>}>{use(component)}</Suspense>
-}
 
 const routeTree = rootRoute.addChildren([indexRoute, aboutRoute])
 

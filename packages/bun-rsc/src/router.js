@@ -1,5 +1,5 @@
 // @ts-expect-error Module '"react"' has no exported member 'use'.
-import { StrictMode, useEffect, useState, use, startTransition } from "react";
+import { StrictMode, useEffect, useState, use, Suspense } from "react";
 import { createRoot } from "react-dom/client";
 // @ts-expect-error Module '"react-server-dom-webpack"' don't have types
 import { createFromFetch } from "react-server-dom-webpack/client";
@@ -51,6 +51,20 @@ export function rscLoader({ location }) {
   const lastSegment = pathNameSplit[pathNameSplit.length - 1];
   const url = `/rsc?component=${lastSegment}`;
 
-  const lazyJsx = createFromFetch(fetch(url));
-  return lazyJsx;
+  return createFromFetch(fetch(url));
+}
+
+export function Await({ component, fallback }) {
+  return <Suspense fallback={fallback}>{use(component)}</Suspense>;
+}
+
+export function ServerOutput({ componentName, fallback }) {
+  const url = `/rsc?component=${componentName}`;
+
+  const [cache, setCache] = useState(initialCache);
+  if (!cache.has(url)) {
+    cache.set(url, createFromFetch(fetch(url)));
+  }
+  const lazyJsx = cache.get(url);
+  return <Suspense fallback={fallback}>{use(lazyJsx)}</Suspense>;
 }
