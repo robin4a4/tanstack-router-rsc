@@ -3,8 +3,8 @@
   "module": "index.ts",
   "type": "module",
   "scripts": {
-    "serve": "bun run ../bun-rsc/src/serve.tsx",
-    "build": "bun run ../bun-rsc/src/build.tsx"
+    "serve": "bun run ../tanstack-router-rsc/src/serve.tsx",
+    "build": "bun run ../tanstack-router-rsc/src/build-app.tsx"
   },
   "devDependencies": {
     "bun-types": "latest"
@@ -13,6 +13,7 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "bun-rsc": "workspace:*"
+    "@tanstack/react-router": "beta",
+    "tanstack-router-rsc": "workspace:*"
   }
 }

@@ -1,10 +1,12 @@
 {
-  "name": "bun-rsc",
+  "name": "tanstack-router-rsc",
   "type": "module",
-  "exports": {
-    ".": "./src/router.js",
-    "./package.json": "./package.json"
+  "scripts": {
+    "build": "tsup src/loader.tsx --format esm,cjs --dts"
   },
+  "main": "dist/loader.cjs",
+  "module": "dist/loader.js",
+  "types": "dist/loader.d.ts",
   "devDependencies": {
     "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
@@ -19,6 +21,7 @@
     "postcss": "^8.4.30",
     "react": "18.3.0-canary-41f0e9dae-20230907",
     "react-dom": "18.3.0-canary-41f0e9dae-20230907",
-    "react-server-dom-webpack": "18.3.0-canary-41f0e9dae-20230907"
+    "react-server-dom-webpack": "18.3.0-canary-41f0e9dae-20230907",
+    "tsup": "^8.0.1"
   }
 }
