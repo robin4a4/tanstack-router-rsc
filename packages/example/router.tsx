@@ -38,8 +38,8 @@ const indexRoute = new Route({
     return (
       <div className="flex flex-col gap-4 border border-red-500 rounded p-4">
         Rendered on client
-      <RSCWithoutLoader route={indexRoute} fallback={<div className="bg-gray-100 rounded grid place-content-center" style={{height: "142px"}}>Loading...</div>} />
-      Also rendered on client
+        <RSCWithoutLoader route={indexRoute} fallback={<div className="bg-gray-100 rounded grid place-content-center" style={{height: "142px"}}>Loading...</div>} />
+        Also rendered on client
       </div>
     )
   },
@@ -48,7 +48,7 @@ const indexRoute = new Route({
 const withLoaderRoute = new Route({
   getParentRoute: () => rootRoute,
   path: '/with-loader',
-  loader: () => rscLoader("with-loader"), // would like to juste to loader: rscLoader but we can't retrieve the route name in loader's args
+  loader: () => rscLoader("with-loader"), // I would like to just do `loader: rscLoader` but we can't retrieve the route name in  the loader's args
   component: () => <RSCWithLoader route={withLoaderRoute} fallback={<div>Loading...</div>} />
 })
 
