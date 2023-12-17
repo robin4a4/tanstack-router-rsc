@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "serve": "bun run ../tanstack-router-rsc/src/serve.tsx",
-    "build": "bun run ../tanstack-router-rsc/src/build-app.tsx"
+    "build": "bun run ../tanstack-router-rsc/src/build.tsx"
   },
   "devDependencies": {
     "bun-types": "latest"

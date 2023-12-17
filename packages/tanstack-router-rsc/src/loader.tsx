@@ -14,7 +14,7 @@ export async function rscLoader(loader: any) {
   return { fetchedData };
 }
 
-export function Await({ route, fallback }: { route: any; fallback: React.ReactNode }) {
+export function RSCWithLoader({ route, fallback }: { route: any; fallback: React.ReactNode }) {
   const { fetchedData } = route.useLoaderData();
 
   const [cache] = useState(initialCache);
@@ -27,8 +27,8 @@ export function Await({ route, fallback }: { route: any; fallback: React.ReactNo
   return <Suspense fallback={fallback}>{use(lazyJsx)}</Suspense>;
 }
 
-export function ServerOutput({ componentName, fallback }: { componentName: string; fallback: React.ReactNode }) {
-  const url = `/rsc?component=${componentName}`;
+export function RSCWithoutLoader({ route, fallback }: { route: any; fallback: React.ReactNode }) {
+  const url = `/rsc?component=${route.path}`;
 
   const [cache] = useState(initialCache);
   if (!cache.has(url)) {

@@ -8,6 +8,8 @@ Heavily inspired by:
 
 ## Getting started
 
+### Run the example
+
 Install the packages:
 ```
 bun install

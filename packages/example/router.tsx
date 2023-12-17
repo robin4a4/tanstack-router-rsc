@@ -9,7 +9,7 @@ import {
   RootRoute,
 } from '@tanstack/react-router'
 
-import {rscLoader, Await, ServerOutput} from "tanstack-router-rsc" 
+import {rscLoader, RSCWithLoader, RSCWithoutLoader} from "tanstack-router-rsc" 
 
 const rootRoute = new RootRoute({
   component: () => (
@@ -47,13 +47,13 @@ const aboutRoute = new Route({
   getParentRoute: () => rootRoute,
   path: '/about',
   loader: rscLoader,
-  component: () => <Await route={aboutRoute} fallback={<div>Loading...</div>} />
+  component: () => <RSCWithLoader route={aboutRoute} fallback={<div>Loading...</div>} />
 })
 
 const contactRoute = new Route({
   getParentRoute: () => rootRoute,
   path: '/contact',
-  component: () => <ServerOutput componentName="about" fallback={<div>Loading...</div>} />
+  component: () => <RSCWithoutLoader route={contactRoute} fallback={<div>Loading...</div>} />
 })
 
 const routeTree = rootRoute.addChildren([indexRoute, aboutRoute, contactRoute])

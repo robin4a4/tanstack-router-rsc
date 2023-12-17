@@ -31,12 +31,16 @@ export async function build() {
 		await fs.promises.mkdir(serverDist, { recursive: true });
 	}
 	
+
+	const entrypoints = fs.readdirSync(resolveSrc("rsc")).map((file) => {
+		return resolveSrc(`rsc/${file}`)
+	})
 	const result = await Bun.build({
 		target: "bun",
 		sourcemap: "none",
 		splitting: true,
 		format: "esm",
-		entrypoints: [resolveSrc("rsc/about.tsx")],
+		entrypoints,
 		outdir: serverDist,
 		plugins: [
 			{
@@ -75,7 +79,7 @@ export async function build() {
 							clientComponentMap[id] = {
 								id: outputKey.replace(".tsx", ".js").replace(".ts", ".js"),
 								chunks: [outputKey.replace(".tsx", ".js").replace(".ts", ".js")],
-								name: exp, // TODO support named exports
+								name: exp,
 							};
 						}
 
@@ -111,8 +115,6 @@ export async function build() {
 		splitting: true,
 	});
 
-	// // Write mapping from client-side component ID to chunk
-	// // This is read by the server when generating the RSC stream.
 	await writeClientComponentMap(clientComponentMap);
 }
 
