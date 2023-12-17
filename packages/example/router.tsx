@@ -18,11 +18,11 @@ const rootRoute = new RootRoute({
         <Link to="/" className="[&.active]:font-bold">
           Home
         </Link>{' '}
-        <Link to="/about" className="[&.active]:font-bold">
-          About
+        <Link to="/with-loader" className="[&.active]:font-bold">
+          With loader
         </Link>
-        <Link to="/contact" className="[&.active]:font-bold">
-          Contact
+        <Link to="/without-loader" className="[&.active]:font-bold">
+          Without loader
         </Link>
       </div>
       <hr />
@@ -36,27 +36,29 @@ const indexRoute = new Route({
   path: '/',
   component: function Index() {
     return (
-      <div className="p-2">
-        <h3>Welcome Home!</h3>
+      <div className="flex flex-col gap-4 border border-red-500 rounded p-4">
+        Rendered on client
+      <RSCWithoutLoader route={indexRoute} fallback={<div className="bg-gray-100 rounded grid place-content-center" style={{height: "142px"}}>Loading...</div>} />
+      Also rendered on client
       </div>
     )
   },
 })
 
-const aboutRoute = new Route({
+const withLoaderRoute = new Route({
   getParentRoute: () => rootRoute,
-  path: '/about',
-  loader: rscLoader,
-  component: () => <RSCWithLoader route={aboutRoute} fallback={<div>Loading...</div>} />
+  path: '/with-loader',
+  loader: () => rscLoader("with-loader"), // would like to juste to loader: rscLoader but we can't retrieve the route name in loader's args
+  component: () => <RSCWithLoader route={withLoaderRoute} fallback={<div>Loading...</div>} />
 })
 
-const contactRoute = new Route({
+const withoutLoaderRoute = new Route({
   getParentRoute: () => rootRoute,
-  path: '/contact',
-  component: () => <RSCWithoutLoader route={contactRoute} fallback={<div>Loading...</div>} />
+  path: '/without-loader',
+  component: () => <RSCWithoutLoader route={withoutLoaderRoute} fallback={<div>Loading...</div>} />
 })
 
-const routeTree = rootRoute.addChildren([indexRoute, aboutRoute, contactRoute])
+const routeTree = rootRoute.addChildren([indexRoute, withLoaderRoute, withoutLoaderRoute])
 
 const router = new Router({ routeTree, defaultPreload: 'intent' })
 

@@ -5,10 +5,8 @@ import { createFromFetch } from "react-server-dom-webpack/client";
 
 const initialCache = new Map();
 
-export async function rscLoader(loader: any) {
-  const pathNameSplit = loader.location.pathname.split("/");
-  const lastSegment = pathNameSplit[pathNameSplit.length - 1];
-  const url = `/rsc?component=${lastSegment}`;
+export async function rscLoader(rscName: string) {
+  const url = `/rsc?component=${rscName}`;
   const fetchedData = fetch(url);
 
   return { fetchedData };
@@ -28,7 +26,7 @@ export function RSCWithLoader({ route, fallback }: { route: any; fallback: React
 }
 
 export function RSCWithoutLoader({ route, fallback }: { route: any; fallback: React.ReactNode }) {
-  const url = `/rsc?component=${route.path}`;
+  const url = `/rsc?component=${route.path === "/" ? "index" : route.path}`;
 
   const [cache] = useState(initialCache);
   if (!cache.has(url)) {
