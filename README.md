@@ -1,6 +1,6 @@
 # tanstack-router-rsc
 
-Minimalist React server component implementation using bun using tanstack router on the client
+Minimalist React server component implementation using bun and tanstack router.
 
 Heavily inspired by:
 - https://github.com/bholmesdev/simple-rsc
@@ -16,12 +16,12 @@ bun install
 
 Build the library:
 ```
-cd packages/tanstack-router-rsc; bun run build
+cd packages/tanstack-router-rsc && bun run build
 ```
 
 Build the app:
 ```
-cd ../packages/example; bun run build
+cd ../example && bun run build
 ```
 
 Serve:
@@ -33,7 +33,7 @@ bun run serve
 
 ### Entry point
 
-The entry point of the app is a `router.tsx` file at the root of the project (seee example/router.tsx)
+The entry point of the app is a `router.tsx` file at the root of the project (see example/router.tsx)
 
 ### The `rsc` folder
 
@@ -49,11 +49,11 @@ It allows to preload rsc components in the loader key of the route. You have to 
 loader: () => rscLoader("the-route-name")
 ```
 
-#### `RSCWithLoader`
+#### `<RSCWithLoader/>`
 
 A react component wich accept the route and a fallback as props and which is used in tandem with the rscLoader. Behind the scene it just uses the useLoaderData to retrieve the rsc payload.
 
-#### `RSCWithoutLoader`
+#### `<RSCWithoutLoader/>`
 
 A react component wich accept the route and a fallback as props and which fetches the rsc and returns it directly. We can't preload anything with this component.
 
