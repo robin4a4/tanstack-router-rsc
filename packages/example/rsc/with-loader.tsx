@@ -9,7 +9,7 @@ export default async function About() {
         <p>The rsc is preloaded by tanstack router. The data in this component is not preloaded.</p>
         <Counter />
         {data.map((todo: any) => {
-            return <p>{todo.title}</p>
+            return <p key={todo.id}>{todo.title}</p>
         })}
     </div>
 } 

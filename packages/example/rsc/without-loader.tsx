@@ -9,7 +9,7 @@ export default async function Contact() {
         <p>The rsc is fetched when accessing the route by tanstack router.</p>
         <Counter />
         {data.map((todo: any) => {
-            return <p>{todo.title}</p>
+            return <p key={todo.id}>{todo.title}</p>
         })}
     </div>
 } 
